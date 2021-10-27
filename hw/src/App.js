@@ -11,9 +11,7 @@ function App() {
     const res = await axios.get(url);
     //store the fetched data into array : title & image
     let title = res.data.data.map((e) => e.attributes.canonicalTitle);
-    let image = res.data.data.map((e) => e.attributes.posterImage);
-    //check if image is null
-    image = image.map((i) => i != null && i.original);
+    let image = res.data.data.map((e) => e.attributes.posterImage.original);
     //create array to make array of objects
     let result = [];
     //pushing the elment in array of object EX: {title:test,image:tst.jpg}
