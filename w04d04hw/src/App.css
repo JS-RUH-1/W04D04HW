@@ -1,0 +1,81 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+#kitsu{
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  gap: 20px;
+}
+#card{
+  position: relative;
+}
+#anime{
+  background: rgb(109, 123, 202);
+}
+.title_manga,.title_anime{
+  position: absolute;
+  bottom: 0;
+  left: 1em;
+  padding-right: 10px;
+  text-align: left;
+}
+.title_anime{
+  text-shadow: 2px 2px 2px red, 0px 0px 2px red, -2px -2px 2px red;
+}
+.title_manga{
+  text-shadow: 2px 2px 2px black, 0px 0px 2px black, -2px -2px 2px black;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #fcefe6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width:1200px) {
+  #kitsu{
+    grid-template-columns: 33% 33% 33%;
+    gap: 20px;
+  }
+}
+@media only screen and (max-width:800px) {
+  #kitsu{
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+  }
+}
+@media only screen and (max-width:500px) {
+  #kitsu{
+    grid-template-columns: 100%;
+    gap: 20px;
+  }
+}
