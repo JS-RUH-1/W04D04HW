@@ -31,7 +31,7 @@ function App() {
         console.log(x)
         return (
           <div className="cards">
-            <img src={x.attributes.coverImage.large}></img>
+            <img src={x.attributes.posterImage.large}></img>
             <p>{x.attributes.titles.en}</p>
             
           </div>
