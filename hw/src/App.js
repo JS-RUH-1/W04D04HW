@@ -9,41 +9,57 @@ function App() {
   useEffect(() => {
     const fetchAPI = async (url) => {
       const res = await axios.get(url);
-      let title = res.data.data.map((e) => e.attributes.abbreviatedTitles);
+      //store the fetched data into array : title & image
+      let title = res.data.data.map((e) => e.attributes.slug);
       let image = res.data.data.map((e) => e.attributes.posterImage);
-      console.log(res.data.data);
-      title = title.map((i) =>
-        i[0] != undefined ? i[0] : "Title not supported"
-      );
 
+      //check if image is null
       image = image.map((i) => i != null && i.original);
-
+      //create array to make array of objects
       let result = [];
+      //pushing the elment in array of object EX: {title:test,image:tst.jpg}
       for (let i = 0; i < title.length; i++) {
         result.push({
           title: title[i],
           image: image[i],
         });
       }
+      // set the result in arr
       setArr(result);
     };
     //check if anime call anime func otherwise call get manga func
     resourcetype == "anime"
       ? fetchAPI("https://kitsu.io/api/edge/anime")
       : fetchAPI("https://kitsu.io/api/edge/manga");
+    
   }, [resourcetype]);
 
   return (
-    <div className="App">
-      <button onClick={() => setResourceType("anime")}>Anime</button>
-      <button onClick={() => setResourceType("manga")}>Manga</button>
-
-      {arr.map((i) => (
+    <div>
+      <div className="App">
+        <h1> React Fetch using AXIOS</h1>
         <div>
-          <h4>{i.title}</h4>,
-          <img src={i.image} width={200} height={200} />
+          <button className="btn" onClick={() => setResourceType("anime")}>
+            Anime
+          </button>
+          <button className="btn" onClick={() => setResourceType("manga")}>
+            Manga
+          </button>
         </div>
-      ))}
+      </div>
+      <div className="container">
+        {arr.map((i) => (
+          <div className="mycon">
+            <img
+              src={i.image}
+              width={300}
+              height={300}
+              style={{ borderRadius: 10 }}
+            />
+            <h4>{i.title}</h4>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
