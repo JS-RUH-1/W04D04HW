@@ -1,0 +1,25 @@
+.arr{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    padding: 1ch;
+    margin: 1ch;
+}
+.IMG{
+    border: solid;
+    margin: 1ch;
+    padding: 1ch;
+}
+img{
+    text-align: center;
+}
+button{
+    background-color:rgb(148, 148, 196) ;
+    margin: 2ch;
+    padding: 1ch;
+
+}
+.Btn{
+    text-align: center;
+}
