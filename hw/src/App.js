@@ -10,9 +10,8 @@ function App() {
     const fetchAPI = async (url) => {
       const res = await axios.get(url);
       //store the fetched data into array : title & image
-      let title = res.data.data.map((e) => e.attributes.slug);
+      let title = res.data.data.map((e) => e.attributes.canonicalTitle);
       let image = res.data.data.map((e) => e.attributes.posterImage);
-
       //check if image is null
       image = image.map((i) => i != null && i.original);
       //create array to make array of objects
@@ -24,13 +23,14 @@ function App() {
           image: image[i],
         });
       }
+ 
       // set the result in arr
       setArr(result);
     };
     //check if anime call anime func otherwise call get manga func
     resourcetype == "anime"
-      ? fetchAPI("https://kitsu.io/api/edge/anime")
-      : fetchAPI("https://kitsu.io/api/edge/manga");
+      ? fetchAPI("https://kitsu.io/api/edge//trending/anime")
+      : fetchAPI("https://kitsu.io/api/edge//trending/manga");
     
   }, [resourcetype]);
 
