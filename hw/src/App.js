@@ -6,15 +6,17 @@ function App() {
   const [resourcetype, setResourceType] = useState("anime");
   const [arr, setArr] = useState([]);
 
-  const fetchAPI = async (url) => {
+  const fetchAPI = async () => {
     //fetch the API
-    const res = await axios.get(`https://kitsu.io/api/edge//trending/${url}`);
+    const res = await axios.get(
+      `https://kitsu.io/api/edge//trending/${resourcetype}`
+    );
     //save
     setArr(res.data.data);
   };
+
   useEffect(() => {
-    //check if anime call anime API otherwise  manga
-    resourcetype == "anime" ? fetchAPI("anime") : fetchAPI("manga");
+    fetchAPI();
   }, [resourcetype]);
 
   return (
@@ -30,21 +32,19 @@ function App() {
           </button>
         </div>
       </div>
-      
 
       <div className="container">
-        
-        {  arr.map((i) => (
-            <div className="mycon">
-              <img
-                src={i.attributes.posterImage.original}
-                width={300}
-                height={300}
-                style={{ borderRadius: 10 }}
-              />
-              <h4>{i.attributes.canonicalTitle}</h4>
-            </div>
-          ))}
+        {arr.map((i) => (
+          <div className="mycon">
+            <img
+              src={i.attributes.posterImage.original}
+              width={300}
+              height={300}
+              style={{ borderRadius: 10 }}
+            />
+            <h4>{i.attributes.canonicalTitle}</h4>
+          </div>
+        ))}
       </div>
     </div>
   );
