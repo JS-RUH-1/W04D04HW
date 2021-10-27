@@ -8,28 +8,13 @@ function App() {
 
   const fetchAPI = async (url) => {
     //fetch the API
-    const res = await axios.get(url);
-    //store the fetched data into array : title & image
-    let title = res.data.data.map((e) => e.attributes.canonicalTitle);
-    let image = res.data.data.map((e) => e.attributes.posterImage.original);
-    //create array to make array of objects
-    let result = [];
-    //pushing the elment in array of object EX: {title:test,image:tst.jpg}
-    for (let i = 0; i < title.length; i++) {
-      result.push({
-        title: title[i],
-        image: image[i],
-      });
-    }
-    // set the result in arr
-    setArr(result);
+    const res = await axios.get(`https://kitsu.io/api/edge//trending/${url}`);
+    //save
+    setArr(res.data.data);
   };
-
   useEffect(() => {
-    //check if anime call anime API otherwise call get manga
-    resourcetype == "anime"
-      ? fetchAPI("https://kitsu.io/api/edge//trending/anime")
-      : fetchAPI("https://kitsu.io/api/edge//trending/manga");
+    //check if anime call anime API otherwise  manga
+    resourcetype == "anime" ? fetchAPI("anime") : fetchAPI("manga");
   }, [resourcetype]);
 
   return (
@@ -45,18 +30,21 @@ function App() {
           </button>
         </div>
       </div>
+      
+
       <div className="container">
-        {arr.map((i) => (
-          <div className="mycon">
-            <img
-              src={i.image}
-              width={300}
-              height={300}
-              style={{ borderRadius: 10 }}
-            />
-            <h4>{i.title}</h4>
-          </div>
-        ))}
+        
+        {  arr.map((i) => (
+            <div className="mycon">
+              <img
+                src={i.attributes.posterImage.original}
+                width={300}
+                height={300}
+                style={{ borderRadius: 10 }}
+              />
+              <h4>{i.attributes.canonicalTitle}</h4>
+            </div>
+          ))}
       </div>
     </div>
   );
