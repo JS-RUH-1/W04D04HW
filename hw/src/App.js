@@ -6,32 +6,32 @@ function App() {
   const [resourcetype, setResourceType] = useState("anime");
   const [arr, setArr] = useState([]);
 
+  const fetchAPI = async (url) => {
+    //fetch the API
+    const res = await axios.get(url);
+    //store the fetched data into array : title & image
+    let title = res.data.data.map((e) => e.attributes.canonicalTitle);
+    let image = res.data.data.map((e) => e.attributes.posterImage);
+    //check if image is null
+    image = image.map((i) => i != null && i.original);
+    //create array to make array of objects
+    let result = [];
+    //pushing the elment in array of object EX: {title:test,image:tst.jpg}
+    for (let i = 0; i < title.length; i++) {
+      result.push({
+        title: title[i],
+        image: image[i],
+      });
+    }
+    // set the result in arr
+    setArr(result);
+  };
+
   useEffect(() => {
-    const fetchAPI = async (url) => {
-      const res = await axios.get(url);
-      //store the fetched data into array : title & image
-      let title = res.data.data.map((e) => e.attributes.canonicalTitle);
-      let image = res.data.data.map((e) => e.attributes.posterImage);
-      //check if image is null
-      image = image.map((i) => i != null && i.original);
-      //create array to make array of objects
-      let result = [];
-      //pushing the elment in array of object EX: {title:test,image:tst.jpg}
-      for (let i = 0; i < title.length; i++) {
-        result.push({
-          title: title[i],
-          image: image[i],
-        });
-      }
- 
-      // set the result in arr
-      setArr(result);
-    };
-    //check if anime call anime func otherwise call get manga func
+    //check if anime call anime API otherwise call get manga
     resourcetype == "anime"
       ? fetchAPI("https://kitsu.io/api/edge//trending/anime")
       : fetchAPI("https://kitsu.io/api/edge//trending/manga");
-    
   }, [resourcetype]);
 
   return (
