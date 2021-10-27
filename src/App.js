@@ -6,7 +6,7 @@ function App() {
   const [resourceType, setResourceType] = useState("anime")
   const [items, setItems] = useState([]);
   useEffect(() => {
-    axios.get(`https://kitsu.io/api/edge/${resourceType}?page[limit]=10&page[offset]=0`).then(res => {
+    axios.get(`https://kitsu.io/api/edge/trending/${resourceType}`).then(res => {
       setItems(res.data.data);
     })
 
