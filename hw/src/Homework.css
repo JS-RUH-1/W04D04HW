@@ -1,0 +1,20 @@
+body{
+    background-color:burlywood;
+}
+.content {
+    margin: auto;
+    display: inline-flex;
+    flex-wrap: wrap;
+    padding: 70px;
+}
+
+.content > div {
+    margin: 6px;
+    text-align: center;
+    color: crimson;
+  }
+
+
+  .buttons {
+      margin-left: 44%;
+  }
