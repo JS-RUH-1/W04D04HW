@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import './App.css';
 
 function Trending (){
     
@@ -30,11 +31,12 @@ function Trending (){
 
    return (
        
-       <div>
+       <div className= "style"><br/>
             <button onClick ={()=>setType("Anime")}>Anime</button>
             <button onClick ={()=>setType("Manga")}>Manga</button>
+            <br/><br/>
 
-            <div>
+            <div className= "content">
                 {items.map(function(item) {
                 if (item){
                     return (
